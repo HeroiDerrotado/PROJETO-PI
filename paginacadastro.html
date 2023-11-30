@@ -1,0 +1,157 @@
+<?php
+ include('config.php');
+ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Verifica se os campos do formulário foram preenchidos
+    if (isset($_POST['nome'], $_POST['email'], $_POST['senha'])) {
+        $nome = $_POST['nome'];
+        $email = $_POST['email'];
+        $senha = $_POST['senha'];
+
+        // Hash da senha (recomendado para segurança)
+        $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
+
+        // Preparar a instrução SQL para a inserção
+        $query = "INSERT INTO usuario
+         (nome, email, senha) VALUES ('$nome', '$email', '$senha_hash')";
+
+        // Executar a consulta
+        if ($mysql->query($query) === TRUE) {
+            echo "Registro inserido com sucesso";
+        } else {
+            echo "Erro ao inserir registro: " . $mysql->error;
+        }
+    } else {
+        echo "Todos os campos do formulário devem ser preenchidos.";
+    }
+}
+ 
+ 
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <title>Linhas do Tempo</title>
+</head>
+
+<body>
+
+    <div class="drop">
+
+
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Pesquisa</a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="paginacadastro.html">Cadastre-se</a></li>
+            <li><a class="dropdown-item" href="paginalogin.html">Entrar</a></li>
+            <li><a class="dropdown-item" href="paginanoticias.html">JGB Previsões</a></li>
+            <li><a class="dropdown-item" href="paginadotempo.html">Tempo e Temperaturas</a></li>
+        </ul>
+        </li>
+
+        <div class="cadastro">
+
+            <form action="index.php" method="post">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" name="nome" required>
+
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="email">senha</label>
+                <input type="senha" id="senha" name="senha" required>
+
+                <div class="botão">
+                    <input type="submit" value="REGISTRAR">
+                </div>
+
+
+
+
+            </form>
+
+
+
+            <div class="fotão">
+
+                <!-- Carousel -->
+                <div id="demo" class="carousel slide" data-bs-ride="carousel">
+
+                    <!-- Indicators/dots -->
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+                    </div>
+
+                    <!-- The slideshow/carousel -->
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="la.jpg" alt="Los Angeles" class="d-block" style="width:100%">
+                            <div class="carousel-caption">
+                                <h3>Los Angeles</h3>
+                                <p>We had such a great time in LA!</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="chicago.jpg" alt="Chicago" class="d-block" style="width:100%">
+                            <div class="carousel-caption">
+                                <h3>Chicago</h3>
+                                <p>Thank you, Chicago!</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="ny.jpg" alt="New York" class="d-block" style="width:100%">
+                            <div class="carousel-caption">
+                                <h3>New York</h3>
+                                <p>We love the Big Apple!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Left and right controls/icons -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                </div>
+
+                <div class="container-fluid mt-3">
+                    <h3>Carousel Example</h3>
+                    <p>The following example shows how to create a basic carousel with indicators and controls.</p>
+                </div>
+
+
+
+            </div>
+
+
+
+
+        </div>
+
+
+
+
+
+    </div>
+
+</body>
+
+</html>
